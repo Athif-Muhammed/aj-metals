@@ -1,0 +1,47 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary-navy: #0D1B2A; /* Deep Midnight Navy */
+  --color-navy-light: #1B263B;   /* Muted Slate Blue */
+  --color-navy-dark: #0A1118;    /* Dark Navy/Charcoal */
+  --color-brass-gold: #C5A880;   /* Warm Metallic Gold / Champagne */
+  --color-brass-light: #F7F5F0;  /* Warm Cream off-white */
+  --color-gold-bright: #D4AF37;  /* Polished Brass Gold */
+  --color-text-dark: #1E2833;
+  --color-bg-light: #F7F9FC;
+  --color-whatsapp-green: #25D366;
+  --color-whatsapp-hover: #20BA5A;
+
+  --font-serif: var(--font-playfair), Georgia, serif;
+  --font-sans: var(--font-plus-jakarta), system-ui, -apple-system, sans-serif;
+  
+  --animate-pulse-fab: pulse-fab 2.5s infinite;
+}
+
+@keyframes pulse-fab {
+  0% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 15px rgba(37, 211, 102, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+  }
+}
+
+/* Custom base elements */
+body {
+  background-color: var(--color-bg-light);
+  color: var(--color-text-dark);
+  font-family: var(--font-sans);
+}
+
+/* Horizontal scrollbar styling for category tabs */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
