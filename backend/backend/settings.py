@@ -145,23 +145,18 @@ if os.environ.get('CLOUDINARY_CLOUD_NAME'):
 else:
     DEFAULT_STORAGE_BACKEND = "django.core.files.storage.FileSystemStorage"
 
-from whitenoise.storage import CompressedManifestStaticFilesStorage
-
-class SafeCompressedManifestStaticFilesStorage(CompressedManifestStaticFilesStorage):
-    manifest_strict = False
-
 STORAGES = {
     "default": {
         "BACKEND": DEFAULT_STORAGE_BACKEND,
     },
     "staticfiles": {
-        "BACKEND": "backend.settings.SafeCompressedManifestStaticFilesStorage",
+        "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
     },
 }
 
 # Backward compatibility fields for older libraries (like django-cloudinary-storage) in Django 5.0+
 DEFAULT_FILE_STORAGE = DEFAULT_STORAGE_BACKEND
-STATICFILES_STORAGE = "backend.settings.SafeCompressedManifestStaticFilesStorage"
+STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
