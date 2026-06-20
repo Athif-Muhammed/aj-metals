@@ -30,9 +30,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     
-    # Cloudinary Storage override (must be placed before staticfiles)
-    'cloudinary_storage',
     'django.contrib.staticfiles',
+    # Cloudinary Storage for Media (placed after staticfiles so it doesn't override local static serving)
+    'cloudinary_storage',
     'cloudinary',
     
     # Third-party packages
