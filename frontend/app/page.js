@@ -10,7 +10,19 @@ import ProductModal from "./components/ProductModal";
 import WhatsAppFAB from "./components/WhatsAppFAB";
 import Footer from "./components/Footer";
 
-const BACKEND_URL = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000";
+const getBackendUrl = () => {
+  if (process.env.NEXT_PUBLIC_API_URL) {
+    return process.env.NEXT_PUBLIC_API_URL;
+  }
+  // Fallback automatically to production backend if deployed (not running on localhost)
+  if (typeof window !== "undefined") {
+    const hostname = window.location.hostname;
+    if (hostname !== "localhost" && hostname !== "127.0.0.1" && !hostname.startsWith("192.168.")) {
+      return "https://aj-metals-backend.onrender.com";
+    }
+  }
+  return "http://127.0.0.1:8000";
+};
 
 export default function Home() {
   const [products, setProducts] = useState([]);
@@ -28,15 +40,16 @@ export default function Home() {
     const fetchData = async () => {
       try {
         setLoading(true);
+        const backendUrl = getBackendUrl();
         
         // Fetch Categories
-        const catRes = await fetch(`${BACKEND_URL}/api/categories/`, { cache: 'no-store' });
+        const catRes = await fetch(`${backendUrl}/api/categories/`, { cache: 'no-store' });
         if (!catRes.ok) throw new Error("Failed to fetch categories");
         const catData = await catRes.json();
         setCategories(catData);
         
         // Fetch Products
-        const prodRes = await fetch(`${BACKEND_URL}/api/products/`, { cache: 'no-store' });
+        const prodRes = await fetch(`${backendUrl}/api/products/`, { cache: 'no-store' });
         if (!prodRes.ok) throw new Error("Failed to fetch products");
         const prodData = await prodRes.json();
         setProducts(prodData);
