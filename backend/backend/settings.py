@@ -158,6 +158,9 @@ STORAGES = {
 DEFAULT_FILE_STORAGE = DEFAULT_STORAGE_BACKEND
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
+# Disable strict manifest behavior in Whitenoise to prevent build failure on missing admin icons (Django 5.x/6.0 bug)
+WHITENOISE_MANIFEST_STRICT = False
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
