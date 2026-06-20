@@ -16,8 +16,16 @@ class ProductImageSerializer(serializers.ModelSerializer):
 
     def get_image_filename(self, obj):
         if obj.image_filename:
-            import os
-            return os.path.basename(obj.image_filename.name)
+            try:
+                url = obj.image_filename.url
+                # If it's a Cloudinary URL, return it directly
+                if url.startswith('http'):
+                    return url
+                # Otherwise, return just the filename (basename) for local public folder mapping
+                import os
+                return os.path.basename(obj.image_filename.name)
+            except ValueError:
+                return ""
         return ""
 
 
@@ -40,6 +48,14 @@ class ProductSerializer(serializers.ModelSerializer):
 
     def get_image_filename(self, obj):
         if obj.image_filename:
-            import os
-            return os.path.basename(obj.image_filename.name)
+            try:
+                url = obj.image_filename.url
+                # If it's a Cloudinary URL, return it directly
+                if url.startswith('http'):
+                    return url
+                # Otherwise, return just the filename (basename) for local public folder mapping
+                import os
+                return os.path.basename(obj.image_filename.name)
+            except ValueError:
+                return ""
         return ""

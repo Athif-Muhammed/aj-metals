@@ -19,6 +19,12 @@ export default function ProductCard({ product, onSelectProduct }) {
     window.open(waUrl, "_blank");
   };
 
+  const getImgSrc = (img) => {
+    if (!img) return "/images/placeholder.png";
+    if (img.startsWith("http") || img.startsWith("/")) return img;
+    return `/images/${img}`;
+  };
+
   return (
     <article
       onClick={() => onSelectProduct(product)}
@@ -27,7 +33,7 @@ export default function ProductCard({ product, onSelectProduct }) {
       {/* Product Image Wrapper */}
       <div className="relative aspect-square w-full overflow-hidden bg-bg-light">
         <Image
-          src={`/images/${product.image_filename}`}
+          src={getImgSrc(product.image_filename)}
           alt={product.name}
           fill
           sizes="(max-width: 640px) 100vw, (max-width: 900px) 50vw, 33vw"

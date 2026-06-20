@@ -49,6 +49,12 @@ export default function ProductModal({ product, onClose }) {
     ...(product.additional_images || []).map((img) => img.image_filename)
   ].filter(Boolean);
 
+  const getImgSrc = (img) => {
+    if (!img) return "/images/placeholder.png";
+    if (img.startsWith("http") || img.startsWith("/")) return img;
+    return `/images/${img}`;
+  };
+
   // Minimum swipe distance (in px)
   const minSwipeDistance = 50;
 
@@ -117,7 +123,7 @@ export default function ProductModal({ product, onClose }) {
                 }`}
               >
                 <Image
-                  src={`/images/${img}`}
+                  src={getImgSrc(img)}
                   alt={`${product.name} - Image ${idx + 1}`}
                   fill
                   sizes="(max-width: 768px) 100vw, 50vw"
