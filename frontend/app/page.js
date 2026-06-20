@@ -30,13 +30,13 @@ export default function Home() {
         setLoading(true);
         
         // Fetch Categories
-        const catRes = await fetch(`${BACKEND_URL}/api/categories/`);
+        const catRes = await fetch(`${BACKEND_URL}/api/categories/`, { cache: 'no-store' });
         if (!catRes.ok) throw new Error("Failed to fetch categories");
         const catData = await catRes.json();
         setCategories(catData);
         
         // Fetch Products
-        const prodRes = await fetch(`${BACKEND_URL}/api/products/`);
+        const prodRes = await fetch(`${BACKEND_URL}/api/products/`, { cache: 'no-store' });
         if (!prodRes.ok) throw new Error("Failed to fetch products");
         const prodData = await prodRes.json();
         setProducts(prodData);
