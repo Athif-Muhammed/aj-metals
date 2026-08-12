@@ -11,6 +11,9 @@ python manage.py collectstatic --noinput
 echo "Running database migrations..."
 python manage.py migrate
 
+echo "Populating initial database catalog..."
+python manage.py populate_db
+
 # Automatically configure superuser (create or update password)
 if [ -n "${DJANGO_SUPERUSER_USERNAME}" ] && [ -n "${DJANGO_SUPERUSER_PASSWORD}" ]; then
     echo "Configuring superuser..."

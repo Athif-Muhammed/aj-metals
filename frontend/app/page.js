@@ -18,7 +18,7 @@ const getBackendUrl = () => {
   if (typeof window !== "undefined") {
     const hostname = window.location.hostname;
     if (hostname !== "localhost" && hostname !== "127.0.0.1" && !hostname.startsWith("192.168.")) {
-      return "https://aj-metals-backend.onrender.com";
+      return "https://aj-metals.onrender.com";
     }
   }
   return "http://127.0.0.1:8000";
