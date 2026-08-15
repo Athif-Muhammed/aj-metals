@@ -34,7 +34,11 @@ export default function ProductModal({ product, onClose }) {
 
   const handleWhatsAppOrder = () => {
     const greeting = `Hello AJ Metals Kayamkulam, I am interested in ordering/inquiring about this item from your online catalog:\n\n`;
-    const itemDetails = `*Product:* ${product.name}\n*SKU/ID:* ${product.sku}\n*Details/Specs:* ${product.weight} | ${product.dimensions} | ${product.material}\n*Catalog Price:* ₹${product.price}\n\n`;
+    
+    const specs = [product.weight, product.dimensions, product.material].filter(Boolean).join(" | ");
+    const specsLine = specs ? `*Details/Specs:* ${specs}\n` : '';
+    
+    const itemDetails = `*Product:* ${product.name}\n*SKU/ID:* ${product.sku}\n${specsLine}*Catalog Price:* ₹${product.price}\n\n`;
     const footer = `Please let me know if it is currently in stock, the daily metal rate, and delivery/pickup options. Thank you!`;
     
     const fullMessage = greeting + itemDetails + footer;
@@ -193,25 +197,32 @@ export default function ProductModal({ product, onClose }) {
               )}
             </div>
 
-            <p className="text-xs sm:text-sm text-gray-500 leading-relaxed mb-6">
-              {product.description}
-            </p>
+            <div 
+              className="text-xs sm:text-sm text-gray-500 leading-relaxed mb-6 space-y-2 [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5" 
+              dangerouslySetInnerHTML={{ __html: product.description }} 
+            />
 
             {/* Specifications Table */}
             <table className="w-full text-xs text-left border-collapse mb-8">
               <tbody>
-                <tr className="border-b border-gray-100">
-                  <th className="py-2.5 text-gray-400 font-medium w-1/3">Weight/Volume</th>
-                  <td className="py-2.5 font-bold text-text-dark">{product.weight}</td>
-                </tr>
-                <tr className="border-b border-gray-100">
-                  <th className="py-2.5 text-gray-400 font-medium">Dimensions</th>
-                  <td className="py-2.5 font-bold text-text-dark">{product.dimensions}</td>
-                </tr>
-                <tr className="border-b border-gray-100">
-                  <th className="py-2.5 text-gray-400 font-medium">Material</th>
-                  <td className="py-2.5 font-bold text-text-dark">{product.material}</td>
-                </tr>
+                {product.weight && (
+                  <tr className="border-b border-gray-100">
+                    <th className="py-2.5 text-gray-400 font-medium w-1/3">Weight/Volume</th>
+                    <td className="py-2.5 font-bold text-text-dark">{product.weight}</td>
+                  </tr>
+                )}
+                {product.dimensions && (
+                  <tr className="border-b border-gray-100">
+                    <th className="py-2.5 text-gray-400 font-medium">Dimensions</th>
+                    <td className="py-2.5 font-bold text-text-dark">{product.dimensions}</td>
+                  </tr>
+                )}
+                {product.material && (
+                  <tr className="border-b border-gray-100">
+                    <th className="py-2.5 text-gray-400 font-medium">Material</th>
+                    <td className="py-2.5 font-bold text-text-dark">{product.material}</td>
+                  </tr>
+                )}
                 <tr>
                   <th className="py-2.5 text-gray-400 font-medium">SKU Code</th>
                   <td className="py-2.5 font-bold text-text-dark">{product.sku}</td>

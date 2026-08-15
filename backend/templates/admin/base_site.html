@@ -1,5 +1,122 @@
 {% extends "admin/base.html" %}
 
+{% block extrahead %}
+{{ block.super }}
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    var textarea = document.getElementById("id_description");
+    if (textarea) {
+        // Load Quill CSS
+        var css = document.createElement("link");
+        css.rel = "stylesheet";
+        css.href = "https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css";
+        document.head.appendChild(css);
+
+        // Load Quill JS
+        var script = document.createElement("script");
+        script.src = "https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js";
+        script.onload = function() {
+            // Create a wrapper container for layout
+            var wrapper = document.createElement("div");
+            wrapper.style.maxWidth = "800px";
+            wrapper.style.marginBottom = "20px";
+            
+            // Create editor container
+            var editorContainer = document.createElement("div");
+            editorContainer.id = "quill-editor";
+            editorContainer.style.height = "250px";
+            editorContainer.style.background = "#ffffff";
+            editorContainer.style.borderRadius = "0 0 8px 8px";
+            
+            wrapper.appendChild(editorContainer);
+            
+            // Insert it before the textarea
+            textarea.parentNode.insertBefore(wrapper, textarea);
+            
+            // Hide original textarea
+            textarea.style.display = "none";
+            
+            // Initialize Quill
+            var quill = new Quill('#quill-editor', {
+                theme: 'snow',
+                modules: {
+                    toolbar: [
+                        [{ 'header': [1, 2, 3, false] }],
+                        ['bold', 'italic', 'underline', 'strike'],
+                        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+                        ['clean']
+                    ]
+                }
+            });
+            
+            // Sync initial value
+            quill.root.innerHTML = textarea.value;
+            
+            // Sync on change
+            quill.on('text-change', function() {
+                textarea.value = quill.root.innerHTML;
+            });
+            
+            // Safety sync before save
+            var form = textarea.closest("form");
+            if (form) {
+                form.addEventListener("submit", function() {
+                    textarea.value = quill.root.innerHTML;
+                });
+            }
+
+            // Create and append the "Insert Specifications Template" button
+            var buttonContainer = document.createElement("div");
+            buttonContainer.style.marginTop = "8px";
+            
+            var btn = document.createElement("button");
+            btn.type = "button";
+            btn.innerHTML = "＋ Insert Specifications Template";
+            btn.style.background = "#103A8A";
+            btn.style.color = "#ffffff";
+            btn.style.border = "none";
+            btn.style.borderRadius = "6px";
+            btn.style.padding = "6px 14px";
+            btn.style.fontSize = "12px";
+            btn.style.fontWeight = "bold";
+            btn.style.cursor = "pointer";
+            btn.style.transition = "all 0.2s ease";
+            btn.style.boxShadow = "0 1px 2px rgba(0,0,0,0.05)";
+            
+            btn.onmouseover = function() {
+                btn.style.background = "#1e53b0";
+            };
+            btn.onmouseout = function() {
+                btn.style.background = "#103A8A";
+            };
+            
+            btn.onclick = function() {
+                var range = quill.getSelection();
+                var template = `
+                    <p><strong>Specifications:</strong></p>
+                    <ul>
+                        <li><strong>Weight:</strong> </li>
+                        <li><strong>Dimensions:</strong> </li>
+                        <li><strong>Material:</strong> Pure Brass</li>
+                    </ul>
+                    <p></p>
+                `;
+                if (range) {
+                    quill.clipboard.dangerouslyPasteHTML(range.index, template);
+                } else {
+                    quill.clipboard.dangerouslyPasteHTML(quill.getLength(), template);
+                }
+            };
+            
+            buttonContainer.appendChild(btn);
+            wrapper.parentNode.insertBefore(buttonContainer, wrapper.nextSibling);
+        };
+        document.body.appendChild(script);
+    }
+});
+</script>
+{% endblock %}
+
 {% block title %}{% if subtitle %}{{ subtitle }} | {% endif %}{{ title }} | {{ site_title|default:_('Django site admin') }}{% endblock %}
 
 {% block branding %}

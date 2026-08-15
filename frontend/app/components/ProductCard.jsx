@@ -10,7 +10,11 @@ export default function ProductCard({ product, onSelectProduct }) {
     e.stopPropagation(); // Avoid opening quick-view modal on CTA click
     
     const greeting = `Hello AJ Metals Kayamkulam, I am interested in ordering/inquiring about this item from your online catalog:\n\n`;
-    const itemDetails = `*Product:* ${product.name}\n*SKU/ID:* ${product.sku}\n*Details/Specs:* ${product.weight} | ${product.dimensions} | ${product.material}\n*Catalog Price:* ₹${product.price}\n\n`;
+    
+    const specs = [product.weight, product.dimensions, product.material].filter(Boolean).join(" | ");
+    const specsLine = specs ? `*Details/Specs:* ${specs}\n` : '';
+    
+    const itemDetails = `*Product:* ${product.name}\n*SKU/ID:* ${product.sku}\n${specsLine}*Catalog Price:* ₹${product.price}\n\n`;
     const footer = `Please let me know if it is currently in stock, the daily metal rate, and delivery/pickup options. Thank you!`;
     
     const fullMessage = greeting + itemDetails + footer;
@@ -66,10 +70,12 @@ export default function ProductCard({ product, onSelectProduct }) {
         </h3>
 
         {/* Specs snippet */}
-        <div className="flex items-center gap-1.5 text-xs text-gray-500 mb-4 mt-auto">
-          <Scale size={14} className="text-brass-gold" />
-          <span>{product.weight} | {product.dimensions}</span>
-        </div>
+        {(product.weight || product.dimensions) && (
+          <div className="flex items-center gap-1.5 text-xs text-gray-500 mb-4 mt-auto">
+            <Scale size={14} className="text-brass-gold" />
+            <span>{[product.weight, product.dimensions].filter(Boolean).join(" | ")}</span>
+          </div>
+        )}
 
         {/* Pricing */}
         <div className="flex items-baseline gap-2 mb-4">

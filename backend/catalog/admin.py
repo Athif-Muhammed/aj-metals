@@ -21,8 +21,8 @@ class CategoryAdmin(admin.ModelAdmin):
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
     inlines = [ProductImageInline]
-    list_display = ('sku', 'name', 'category', 'price', 'material', 'in_stock')
-    list_filter = ('category', 'in_stock', 'material')
+    list_display = ('sku', 'name', 'category', 'price', 'in_stock')
+    list_filter = ('category', 'in_stock')
     search_fields = ('sku', 'name', 'description')
     prepopulated_fields = {'slug': ('name',)}
     ordering = ('-created_at',)
@@ -30,9 +30,6 @@ class ProductAdmin(admin.ModelAdmin):
     fieldsets = (
         ('Basic Information', {
             'fields': ('sku', 'name', 'slug', 'description', 'category')
-        }),
-        ('Specifications', {
-            'fields': ('weight', 'dimensions', 'material')
         }),
         ('Pricing & Availability', {
             'fields': ('price', 'original_price', 'in_stock')

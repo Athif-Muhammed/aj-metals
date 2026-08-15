@@ -26,9 +26,9 @@ class Product(models.Model):
     category = models.ForeignKey(Category, related_name='products', on_delete=models.SET_NULL, null=True)
     
     # Metal specifications
-    weight = models.CharField(max_length=50, help_text="e.g. 4.8 kg or 250 grams")
-    dimensions = models.CharField(max_length=100, help_text="e.g. 24 inches or 12 x 8 inches")
-    material = models.CharField(max_length=100, default="Pure Brass", help_text="e.g. Pure Brass, Bell Metal, Copper")
+    weight = models.CharField(max_length=50, blank=True, null=True, help_text="e.g. 4.8 kg or 250 grams")
+    dimensions = models.CharField(max_length=100, blank=True, null=True, help_text="e.g. 24 inches or 12 x 8 inches")
+    material = models.CharField(max_length=100, blank=True, default="Pure Brass", help_text="e.g. Pure Brass, Bell Metal, Copper")
     
     # Pricing
     price = models.DecimalField(max_digits=10, decimal_places=2)
