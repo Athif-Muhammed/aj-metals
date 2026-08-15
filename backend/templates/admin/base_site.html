@@ -129,8 +129,9 @@ document.addEventListener("DOMContentLoaded", function() {
   /* Import Plus Jakarta Sans for modern typography */
   @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
-  /* Custom minimal styles for Django Admin */
-  :root {
+  /* Force light theme variables even in dark mode */
+  :root,
+  [data-theme="dark"] {
     --primary: #103A8A !important;
     --primary-fg: #ffffff !important;
     --accent: #F5A623 !important;
@@ -142,6 +143,45 @@ document.addEventListener("DOMContentLoaded", function() {
     --breadcrumbs-fg: #64748b !important;
     --link-color: #103A8A !important;
     --link-hover-color: #1e53b0 !important;
+
+    /* Django 4.x built-in variables overrides */
+    --body-bg: #f8fafc !important;
+    --body-fg: #1e2833 !important;
+    --border-color: #e2e8f0 !important;
+    --darkened-bg: #f1f5f9 !important;
+    --selected-bg: #e0eafd !important;
+    --selected-row: #e0eafd !important;
+    --button-bg: #ffffff !important;
+    --button-hover-bg: #f8fafc !important;
+    --default-button-bg: #103A8A !important;
+    --default-button-hover-bg: #1e53b0 !important;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --primary: #103A8A !important;
+      --primary-fg: #ffffff !important;
+      --accent: #F5A623 !important;
+      --body-bg: #f8fafc !important;
+      --body-fg: #1e2833 !important;
+      --header-bg: #103A8A !important;
+      --header-color: #ffffff !important;
+      --breadcrumbs-bg: #ffffff !important;
+      --breadcrumbs-fg: #64748b !important;
+      --link-color: #103A8A !important;
+      --link-hover-color: #1e53b0 !important;
+
+      --body-bg: #f8fafc !important;
+      --body-fg: #1e2833 !important;
+      --border-color: #e2e8f0 !important;
+      --darkened-bg: #f1f5f9 !important;
+      --selected-bg: #e0eafd !important;
+      --selected-row: #e0eafd !important;
+      --button-bg: #ffffff !important;
+      --button-hover-bg: #f8fafc !important;
+      --default-button-bg: #103A8A !important;
+      --default-button-hover-bg: #1e53b0 !important;
+    }
   }
   
   /* Overall modern font styling */
@@ -557,6 +597,75 @@ document.addEventListener("DOMContentLoaded", function() {
   }
   #nav-sidebar td, #nav-sidebar th {
     padding: 8px 12px !important;
+  }
+
+  /* --- Dashboard & Modules Specific Fixes (Forces High Contrast Light Mode) --- */
+  .dashboard .module table,
+  .dashboard .module tr,
+  .dashboard .module td,
+  .dashboard .module th {
+    background-color: #ffffff !important;
+    color: #334155 !important;
+  }
+
+  .dashboard .module tr:hover td,
+  .dashboard .module tr:hover th {
+    background-color: #f8fafc !important;
+  }
+
+  .module caption, .module h2 {
+    background: #f8fafc !important;
+    color: #092252 !important;
+  }
+
+  .dashboard .module th a,
+  .dashboard .module td a {
+    color: #103A8A !important;
+    font-weight: 600 !important;
+    text-decoration: none !important;
+  }
+
+  .dashboard .module th a:hover,
+  .dashboard .module td a:hover {
+    color: #1e53b0 !important;
+    text-decoration: underline !important;
+  }
+
+  /* Fix Recent Actions panel contrast */
+  #recent-actions-module {
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 12px !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05) !important;
+    color: #334155 !important;
+  }
+  
+  #recent-actions-module h2 {
+    background: #f8fafc !important;
+    color: #092252 !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+  }
+
+  #recent-actions-module ul,
+  #recent-actions-module li {
+    background-color: #ffffff !important;
+    color: #64748b !important;
+  }
+  
+  #recent-actions-module li a {
+    color: #103A8A !important;
+  }
+
+  #recent-actions-module li a:hover {
+    color: #1e53b0 !important;
+  }
+
+  /* Re-style header tags inside modules */
+  .mini-layout .module h2, 
+  .mini-layout .module h3,
+  .dashboard .module h2,
+  .dashboard .module h3 {
+    color: #092252 !important;
   }
 </style>
 {% endblock %}
