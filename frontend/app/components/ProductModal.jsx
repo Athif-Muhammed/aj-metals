@@ -110,137 +110,124 @@ export default function ProductModal({ product, onClose }) {
           <X size={20} />
         </button>
 
-        {/* Left Side: Product Image Carousel */}
-        <div
-          className="relative aspect-square md:aspect-auto md:h-full min-h-[350px] bg-bg-light overflow-hidden group/carousel"
-          onTouchStart={images.length > 1 ? onTouchStart : undefined}
-          onTouchMove={images.length > 1 ? onTouchMove : undefined}
-          onTouchEnd={images.length > 1 ? onTouchEnd : undefined}
-        >
-          {/* Slides Wrapper */}
-          <div className="relative w-full h-full">
-            {images.map((img, idx) => (
-              <div
-                key={idx}
-                className={`absolute inset-0 transition-opacity duration-500 ease-in-out ${
-                  idx === currentIndex ? "opacity-100 z-1" : "opacity-0 z-0 pointer-events-none"
-                }`}
-              >
-                <Image
-                  src={getImgSrc(img)}
-                  alt={`${product.name} - Image ${idx + 1}`}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  priority={idx === 0}
-                  className="object-cover"
-                />
-              </div>
-            ))}
-          </div>
-
-          {/* Navigation Arrows (Desktop/Laptop) */}
-          {images.length > 1 && (
-            <>
-              <button
-                onClick={handlePrev}
-                className="absolute left-3 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-white/85 backdrop-blur-xs text-primary-navy border border-black/5 flex justify-center items-center shadow-md hover:bg-primary-navy hover:text-white transition-all duration-200 cursor-pointer"
-                aria-label="Previous image"
-              >
-                <ChevronLeft size={18} />
-              </button>
-              <button
-                onClick={handleNext}
-                className="absolute right-3 top-1/2 -translate-y-1/2 z-10 w-9 h-9 rounded-full bg-white/85 backdrop-blur-xs text-primary-navy border border-black/5 flex justify-center items-center shadow-md hover:bg-primary-navy hover:text-white transition-all duration-200 cursor-pointer"
-                aria-label="Next image"
-              >
-                <ChevronRight size={18} />
-              </button>
-            </>
-          )}
-
-          {/* Dot Indicators */}
-          {images.length > 1 && (
-            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-10 flex gap-1.5 bg-black/25 backdrop-blur-xs px-3 py-1.5 rounded-full">
-              {images.map((_, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => setCurrentIndex(idx)}
-                  className={`w-2 h-2 rounded-full transition-all duration-300 cursor-pointer ${
-                    idx === currentIndex ? "bg-white scale-120" : "bg-white/40 hover:bg-white/70"
-                  }`}
-                  aria-label={`Go to slide ${idx + 1}`}
-                />
-              ))}
-            </div>
-          )}
+        {/* Left Side: Product Image */}
+        <div className="relative aspect-square md:aspect-auto md:h-full min-h-[350px] bg-bg-light overflow-hidden">
+          <Image
+            src={getImgSrc(product.image_filename)}
+            alt={product.name}
+            fill
+            sizes="(max-width: 768px) 100vw, 50vw"
+            priority
+            className="object-cover"
+          />
         </div>
 
         {/* Right Side: Product Details */}
-        <div className="p-6 sm:p-8 flex flex-col justify-between">
+        <div className="p-6 sm:p-8 flex flex-col justify-between bg-white">
           <div>
-            <span className="text-[10px] sm:text-xs font-bold uppercase tracking-[2px] text-brass-gold mb-2 block">
-              {product.category_name}
-            </span>
-            <h2 className="font-serif text-2xl font-black text-primary-navy leading-tight mb-4">
+            <div className="flex items-center justify-between gap-2 mb-2">
+              <span className="text-[9px] font-black uppercase tracking-[2.5px] text-brass-gold">
+                {product.category_name}
+              </span>
+              <span className="bg-brass-light border border-brass-gold/20 text-primary-navy text-[9px] font-bold px-2 py-0.5 rounded-sm">
+                {product.material}
+              </span>
+            </div>
+            
+            <h2 className="font-serif text-xl sm:text-2xl font-bold text-primary-navy leading-tight mb-3">
               {product.name}
             </h2>
 
-            {/* Price section */}
-            <div className="flex items-baseline gap-3 mb-6">
-              <span className="font-serif text-2xl font-extrabold text-gold-bright">
-                ₹{parseFloat(product.price).toLocaleString()}
-              </span>
+            {/* Price Section with Savings Info */}
+            <div className="flex items-center gap-3 mb-5 bg-brass-light/30 border border-brass-gold/10 p-3 rounded-lg">
+              <div className="flex flex-col">
+                <span className="font-serif text-2xl font-black text-gold-bright">
+                  ₹{parseFloat(product.price).toLocaleString()}
+                </span>
+                {product.original_price && (
+                  <span className="text-[11px] text-gray-400 line-through">
+                    Original: ₹{parseFloat(product.original_price).toLocaleString()}
+                  </span>
+                )}
+              </div>
               {product.original_price && (
-                <span className="text-sm text-gray-400 line-through">
-                  ₹{parseFloat(product.original_price).toLocaleString()}
+                <span className="ml-auto text-[10px] bg-gold-bright/15 text-gold-bright font-black uppercase tracking-wider px-2 py-1 rounded-sm">
+                  Save ₹{(parseFloat(product.original_price) - parseFloat(product.price)).toLocaleString()}
                 </span>
               )}
             </div>
 
+            {/* Product Description */}
             <div 
-              className="text-xs sm:text-sm text-gray-500 leading-relaxed mb-6 space-y-2 [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5" 
+              className="text-xs text-gray-600 leading-relaxed mb-6 space-y-2 [&_ul]:list-disc [&_ul]:pl-5 [&_ol]:list-decimal [&_ol]:pl-5 font-sans" 
               dangerouslySetInnerHTML={{ __html: product.description }} 
             />
 
+            {/* Ayurvedic Health / Material Tip (Consumer Psychology Hook) */}
+            {(() => {
+              const mat = product.material.toLowerCase();
+              let healthTip = null;
+              if (mat.includes("copper")) {
+                healthTip = "Ayurvedic practice suggests storing water in copper containers (Tamra Jal) balances body systems, boosts digestion, and acts as a natural antioxidant.";
+              } else if (mat.includes("brass")) {
+                healthTip = "Cooking in traditional brass cookware preserves up to 93% of natural food nutrients and releases healthy trace elements into your daily meals.";
+              } else if (mat.includes("bell metal") || mat.includes("bronze") || mat.includes("vengala")) {
+                healthTip = "Traditional bell metal (Venkalam) is alkaline, meaning it naturally purifies cooked dishes, balances pH levels, and enhances digestability.";
+              }
+              
+              if (!healthTip) return null;
+              return (
+                <div className="mb-6 p-4 rounded-lg bg-brass-gold/5 border-l-3 border-brass-gold flex gap-3 items-start">
+                  <span className="text-brass-gold text-lg leading-none mt-0.5">✨</span>
+                  <div>
+                    <h5 className="text-[10px] uppercase tracking-[1px] font-black text-primary-navy mb-0.5">Ayurvedic Purity Tip</h5>
+                    <p className="text-[11px] leading-normal text-primary-navy/80">{healthTip}</p>
+                  </div>
+                </div>
+              );
+            })()}
+
             {/* Specifications Table */}
-            <table className="w-full text-xs text-left border-collapse mb-8">
-              <tbody>
-                {product.weight && (
-                  <tr className="border-b border-gray-100">
-                    <th className="py-2.5 text-gray-400 font-medium w-1/3">Weight/Volume</th>
-                    <td className="py-2.5 font-bold text-text-dark">{product.weight}</td>
+            <div className="border border-brass-gold/20 rounded-lg overflow-hidden mb-6">
+              <table className="w-full text-xs text-left border-collapse">
+                <tbody>
+                  {product.weight && (
+                    <tr className="border-b border-brass-gold/10 bg-brass-light/10">
+                      <th className="py-2.5 px-3 text-gray-400 font-medium w-1/3">Weight/Volume</th>
+                      <td className="py-2.5 px-3 font-bold text-primary-navy">{product.weight}</td>
+                    </tr>
+                  )}
+                  {product.dimensions && (
+                    <tr className="border-b border-brass-gold/10">
+                      <th className="py-2.5 px-3 text-gray-400 font-medium">Dimensions</th>
+                      <td className="py-2.5 px-3 font-bold text-primary-navy">{product.dimensions}</td>
+                    </tr>
+                  )}
+                  {product.material && (
+                    <tr className="border-b border-brass-gold/10 bg-brass-light/10">
+                      <th className="py-2.5 px-3 text-gray-400 font-medium">Material</th>
+                      <td className="py-2.5 px-3 font-bold text-primary-navy">{product.material}</td>
+                    </tr>
+                  )}
+                  <tr>
+                    <th className="py-2.5 px-3 text-gray-400 font-medium">SKU ID</th>
+                    <td className="py-2.5 px-3 font-mono font-bold text-primary-navy">{product.sku}</td>
                   </tr>
-                )}
-                {product.dimensions && (
-                  <tr className="border-b border-gray-100">
-                    <th className="py-2.5 text-gray-400 font-medium">Dimensions</th>
-                    <td className="py-2.5 font-bold text-text-dark">{product.dimensions}</td>
-                  </tr>
-                )}
-                {product.material && (
-                  <tr className="border-b border-gray-100">
-                    <th className="py-2.5 text-gray-400 font-medium">Material</th>
-                    <td className="py-2.5 font-bold text-text-dark">{product.material}</td>
-                  </tr>
-                )}
-                <tr>
-                  <th className="py-2.5 text-gray-400 font-medium">SKU Code</th>
-                  <td className="py-2.5 font-bold text-text-dark">{product.sku}</td>
-                </tr>
-              </tbody>
-            </table>
+                </tbody>
+              </table>
+            </div>
           </div>
 
-          <div className="mt-auto">
+          <div className="mt-auto pt-4 border-t border-gray-100 flex flex-col gap-2">
             <button
               onClick={handleWhatsAppOrder}
               disabled={!product.in_stock}
-              className={`w-full py-4 rounded-md text-sm font-bold flex justify-center items-center gap-2 shadow-md transition-all duration-300 cursor-pointer ${
+              className={`w-full py-3.5 rounded-md text-xs font-black uppercase tracking-wider flex justify-center items-center gap-2 shadow-md transition-all duration-300 cursor-pointer ${
                 product.in_stock
-                  ? "bg-whatsapp-green hover:bg-whatsapp-hover text-white shadow-whatsapp-green/15 hover:shadow-whatsapp-green/25 hover:-translate-y-0.5"
-                  : "bg-gray-200 text-gray-400 cursor-not-allowed"
+                  ? "bg-whatsapp-green hover:bg-whatsapp-hover text-white shadow-whatsapp-green/10 hover:-translate-y-0.5"
+                  : "bg-gray-100 text-gray-400 cursor-not-allowed"
               }`}
-              aria-label="Order this item on WhatsApp"
+              aria-label="Inquire about this item on WhatsApp"
             >
               <svg
                 className="w-4 h-4 fill-current"
@@ -250,8 +237,11 @@ export default function ProductModal({ product, onClose }) {
                 <path d="M17.472 14.382c-.022-.08-.06-.154-.109-.217l-1.556-2.006c-.198-.255-.549-.333-.831-.184l-.872.463c-.156.083-.342.062-.477-.053l-2.455-2.073c-.106-.09-.153-.23-.119-.364l.261-.99c.079-.3.003-.623-.198-.856l-1.423-1.65c-.244-.282-.647-.333-.948-.12L8.28 6.945c-.255.18-.396.48-.372.793.18 2.378 1.139 4.606 2.7 6.386a11.137 11.137 0 0 0 7.828 4.298c.328.024.636-.118.816-.373l1.109-1.57c.214-.303.162-.716-.123-.96l-1.767-1.537z" />
                 <path d="M12.004 2c-5.514 0-10 4.486-10 10 0 1.944.563 3.76 1.537 5.305L2.03 21.97a.5.5 0 0 0 .616.616l4.665-1.511A9.92 9.92 0 0 0 12.004 22c5.514 0 10-4.486 10-10s-4.486-10-10-10zm0 18.5c-1.745 0-3.376-.532-4.743-1.442a.5.5 0 0 0-.411-.061l-3.21 1.04 1.04-3.21c.045-.141.021-.295-.067-.417a8.437 8.437 0 0 1-1.613-4.91c0-4.687 3.813-8.5 8.5-8.5s8.5 3.813 8.5 8.5-3.813 8.5-8.5 8.5z" />
               </svg>
-              Order on WhatsApp
+              Inquire on WhatsApp
             </button>
+            <p className="text-[10px] text-center text-gray-400">
+              AJ Metals is a physical showroom in Kayamkulam. Tap above to check stock or reserve for in-store pickup.
+            </p>
           </div>
         </div>
       </div>
