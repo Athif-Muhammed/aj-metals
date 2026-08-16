@@ -2,8 +2,11 @@
 
 import Image from "next/image";
 import { Scale } from "lucide-react";
+import { useState } from "react";
+import ProductIllustration from "./ProductIllustration";
 
 export default function ProductCard({ product, onSelectProduct }) {
+  const [imageError, setImageError] = useState(false);
   const STORE_PHONE = "919446571575";
 
   const handleWhatsAppOrder = (e) => {
@@ -35,15 +38,22 @@ export default function ProductCard({ product, onSelectProduct }) {
       className="luxury-card rounded-xl overflow-hidden flex flex-col cursor-pointer group"
     >
       {/* Product Image Wrapper */}
-      <div className="relative aspect-square w-full overflow-hidden bg-bg-light">
-        <Image
-          src={getImgSrc(product.image_filename)}
-          alt={product.name}
-          fill
-          sizes="(max-width: 640px) 100vw, (max-width: 900px) 50vw, 33vw"
-          loading="lazy"
-          className="object-cover transition-transform duration-700 group-hover:scale-108"
-        />
+      <div className="relative aspect-square w-full overflow-hidden bg-bg-light flex items-center justify-center">
+        {!imageError && product.image_filename ? (
+          <Image
+            src={getImgSrc(product.image_filename)}
+            alt={product.name}
+            fill
+            sizes="(max-width: 640px) 100vw, (max-width: 900px) 50vw, 33vw"
+            loading="lazy"
+            className="object-cover transition-transform duration-700 group-hover:scale-108"
+            onError={() => setImageError(true)}
+          />
+        ) : (
+          <div className="w-4/5 h-4/5 p-4 flex items-center justify-center opacity-70 group-hover:scale-105 transition-transform duration-700">
+            <ProductIllustration sku={product.sku} className="w-full h-full text-primary-navy/40" />
+          </div>
+        )}
         
         {/* Purity & Material Badge */}
         <span className="absolute top-3 left-3 bg-primary-navy/95 backdrop-blur-xs border-l-2 border-gold-bright text-white text-[9px] font-extrabold tracking-[1px] uppercase px-2.5 py-1.5 rounded-xs shadow-md z-10">

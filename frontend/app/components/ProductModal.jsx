@@ -3,11 +3,18 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
+import ProductIllustration from "./ProductIllustration";
 
 export default function ProductModal({ product, onClose }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [touchStart, setTouchStart] = useState(null);
   const [touchEnd, setTouchEnd] = useState(null);
+  const [imageError, setImageError] = useState(false);
+
+  // Reset image error state when navigating between images
+  useEffect(() => {
+    setImageError(false);
+  }, [currentIndex]);
 
   // Prevent background scroll when modal is open
   useEffect(() => {
@@ -110,16 +117,70 @@ export default function ProductModal({ product, onClose }) {
           <X size={20} />
         </button>
 
-        {/* Left Side: Product Image */}
-        <div className="relative aspect-square md:aspect-auto md:h-full min-h-[350px] bg-bg-light overflow-hidden">
-          <Image
-            src={getImgSrc(product.image_filename)}
-            alt={product.name}
-            fill
-            sizes="(max-width: 768px) 100vw, 50vw"
-            priority
-            className="object-cover"
-          />
+        {/* Left Side: Product Image Carousel */}
+        <div 
+          className="relative aspect-square md:aspect-auto md:h-full min-h-[350px] bg-bg-light overflow-hidden group/carousel"
+          onTouchStart={onTouchStart}
+          onTouchMove={onTouchMove}
+          onTouchEnd={onTouchEnd}
+        >
+          {images.length > 0 ? (
+            !imageError ? (
+              <Image
+                src={getImgSrc(images[currentIndex])}
+                alt={`${product.name} - View ${currentIndex + 1}`}
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                priority={currentIndex === 0}
+                className="object-cover transition-transform duration-500 ease-out"
+                onError={() => setImageError(true)}
+              />
+            ) : (
+              <div className="absolute inset-0 p-8 flex items-center justify-center bg-brass-light/20">
+                <ProductIllustration sku={product.sku} className="w-4/5 h-4/5 text-primary-navy/40" />
+              </div>
+            )
+          ) : (
+            <div className="absolute inset-0 p-8 flex items-center justify-center bg-brass-light/20">
+              <ProductIllustration sku={product.sku} className="w-4/5 h-4/5 text-primary-navy/40" />
+            </div>
+          )}
+
+          {/* Carousel Arrows */}
+          {images.length > 1 && (
+            <>
+              <button
+                onClick={handlePrev}
+                className="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/80 hover:bg-white text-primary-navy flex justify-center items-center shadow-md opacity-0 group-hover/carousel:opacity-100 transition-opacity duration-300 cursor-pointer"
+                aria-label="Previous image"
+              >
+                <ChevronLeft size={18} />
+              </button>
+              <button
+                onClick={handleNext}
+                className="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/80 hover:bg-white text-primary-navy flex justify-center items-center shadow-md opacity-0 group-hover/carousel:opacity-100 transition-opacity duration-300 cursor-pointer"
+                aria-label="Next image"
+              >
+                <ChevronRight size={18} />
+              </button>
+            </>
+          )}
+
+          {/* Carousel Dots */}
+          {images.length > 1 && (
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-1.5 z-10 bg-black/25 px-2.5 py-1 rounded-full backdrop-blur-xs">
+              {images.map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setCurrentIndex(idx)}
+                  className={`w-2 h-2 rounded-full transition-all duration-300 cursor-pointer ${
+                    currentIndex === idx ? "bg-white scale-110" : "bg-white/40"
+                  }`}
+                  aria-label={`Go to slide ${idx + 1}`}
+                />
+              ))}
+            </div>
+          )}
         </div>
 
         {/* Right Side: Product Details */}

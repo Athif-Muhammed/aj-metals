@@ -5,12 +5,31 @@ from catalog.models import Category, Product
 class Command(BaseCommand):
     help = 'Populates the database with initial Categories and Products mapping to screenshot assets'
 
-    def handle(self, *args, **kwargs):
+    def add_arguments(self, parser):
+        parser.add_argument(
+            '--clear',
+            action='store_true',
+            help='Clear existing products and categories before seeding',
+        )
+
+    def handle(self, *args, **options):
+        clear = options.get('clear', False)
+        
+        # If not clearing and products/categories already exist, skip to prevent overriding client catalog data
+        if not clear and (Product.objects.exists() or Category.objects.exists()):
+            self.stdout.write(self.style.WARNING(
+                "Database already contains categories or products. Skipping seeding to prevent data loss.\n"
+                "To force re-seeding and clear the database, run with: python manage.py populate_db --clear"
+            ))
+            return
+
         self.stdout.write("Populating database...")
         
-        # 1. Clear existing entries
-        Product.objects.all().delete()
-        Category.objects.all().delete()
+        # 1. Clear existing entries if requested
+        if clear:
+            self.stdout.write("Clearing existing entries...")
+            Product.objects.all().delete()
+            Category.objects.all().delete()
         
         # 2. Define categories
         categories_data = [

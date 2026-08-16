@@ -31,6 +31,9 @@ class ProductAdmin(admin.ModelAdmin):
         ('Basic Information', {
             'fields': ('sku', 'name', 'slug', 'description', 'category')
         }),
+        ('Specifications', {
+            'fields': ('material', 'weight', 'dimensions')
+        }),
         ('Pricing & Availability', {
             'fields': ('price', 'original_price', 'in_stock')
         }),
