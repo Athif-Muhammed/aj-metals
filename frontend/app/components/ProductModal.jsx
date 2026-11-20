@@ -4,17 +4,20 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import ProductIllustration from "./ProductIllustration";
+import WhatsAppIcon from "./WhatsAppIcon";
 
 export default function ProductModal({ product, onClose }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [touchStart, setTouchStart] = useState(null);
   const [touchEnd, setTouchEnd] = useState(null);
   const [imageError, setImageError] = useState(false);
+  const [prevIndex, setPrevIndex] = useState(0);
 
-  // Reset image error state when navigating between images
-  useEffect(() => {
+  // Reset image error state when navigating between images (React 19 recommended pattern)
+  if (currentIndex !== prevIndex) {
+    setPrevIndex(currentIndex);
     setImageError(false);
-  }, [currentIndex]);
+  }
 
   // Prevent background scroll when modal is open
   useEffect(() => {
@@ -290,14 +293,7 @@ export default function ProductModal({ product, onClose }) {
               }`}
               aria-label="Inquire about this item on WhatsApp"
             >
-              <svg
-                className="w-4 h-4 fill-current"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path d="M17.472 14.382c-.022-.08-.06-.154-.109-.217l-1.556-2.006c-.198-.255-.549-.333-.831-.184l-.872.463c-.156.083-.342.062-.477-.053l-2.455-2.073c-.106-.09-.153-.23-.119-.364l.261-.99c.079-.3.003-.623-.198-.856l-1.423-1.65c-.244-.282-.647-.333-.948-.12L8.28 6.945c-.255.18-.396.48-.372.793.18 2.378 1.139 4.606 2.7 6.386a11.137 11.137 0 0 0 7.828 4.298c.328.024.636-.118.816-.373l1.109-1.57c.214-.303.162-.716-.123-.96l-1.767-1.537z" />
-                <path d="M12.004 2c-5.514 0-10 4.486-10 10 0 1.944.563 3.76 1.537 5.305L2.03 21.97a.5.5 0 0 0 .616.616l4.665-1.511A9.92 9.92 0 0 0 12.004 22c5.514 0 10-4.486 10-10s-4.486-10-10-10zm0 18.5c-1.745 0-3.376-.532-4.743-1.442a.5.5 0 0 0-.411-.061l-3.21 1.04 1.04-3.21c.045-.141.021-.295-.067-.417a8.437 8.437 0 0 1-1.613-4.91c0-4.687 3.813-8.5 8.5-8.5s8.5 3.813 8.5 8.5-3.813 8.5-8.5 8.5z" />
-              </svg>
+              <WhatsAppIcon className="w-4 h-4 fill-current shrink-0" />
               Inquire on WhatsApp
             </button>
             <p className="text-[10px] text-center text-gray-400">

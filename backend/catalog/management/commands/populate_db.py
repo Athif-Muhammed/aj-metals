@@ -154,6 +154,54 @@ class Command(BaseCommand):
                 "material": "99.9% Pure Copper",
                 "image_filename": "Screenshot 2026-06-19 180803.png",
                 "description": "Reap the health benefits of water stored overnight in pure copper. Features a leak-proof cap, sleek ergonomic design, and a mirror finish. Set includes one bottle and a matching copper tumbler."
+            },
+            {
+                "name": "Handcrafted Brass Kindi (പരമ്പരാഗത കിണ്ടി)",
+                "sku": "AJ-BR-003",
+                "category": categories["Traditional & Pooja Brassware"],
+                "price": 2650.00,
+                "original_price": 3100.00,
+                "weight": "1.8 kg",
+                "dimensions": "Height: 8 inches, Spout: 4 inches",
+                "material": "Pure Brass",
+                "image_filename": "Screenshot 2026-06-19 180649.png",
+                "description": "Essential traditional Kerala ritual water dispensing vessel with elongated pouring spout. Hand-hammered from pure high-grade brass, ideal for pooja rooms, auspicious ceremonies, and temple offerings."
+            },
+            {
+                "name": "Ornate Kerala Thookkuvilakku (തൂക്കുവിളക്ക്)",
+                "sku": "AJ-BR-004",
+                "category": categories["Traditional & Pooja Brassware"],
+                "price": 3800.00,
+                "original_price": 4400.00,
+                "weight": "3.2 kg",
+                "dimensions": "Diameter: 8 inches, Chain: 2.5 feet",
+                "material": "Cast Brass",
+                "image_filename": "Screenshot 2026-06-19 180655.png",
+                "description": "Traditional hanging brass oil lamp featuring a heavy cast oil reservoir and a solid decorative link chain with ornate top hook. Perfect for verandahs, pooja rooms, and temple halls."
+            },
+            {
+                "name": "Authentic Bell Metal Charu Uruli (ചാറുരുളി)",
+                "sku": "AJ-CW-003",
+                "category": categories["Heavy-Duty & Event Cookware"],
+                "price": 9500.00,
+                "original_price": 10800.00,
+                "weight": "8.5 kg",
+                "dimensions": "Capacity: 10 Litres, Rim: 18 inches",
+                "material": "Traditional Bell Metal (Vengala)",
+                "image_filename": "Screenshot 2026-06-19 180734.png",
+                "description": "Heavy-gauge flat-bottomed bell metal cooking vessel designed for slow cooking, payasam, and traditional Kerala sambar. Imparts authentic aroma and exceptional heat retention."
+            },
+            {
+                "name": "Heavy Solid Brass Seva Nazhi / Idiyappam Press (സേവനാഴി)",
+                "sku": "AJ-KE-004",
+                "category": categories["Everyday Kitchen Essentials"],
+                "price": 1650.00,
+                "original_price": 1950.00,
+                "weight": "1.5 kg",
+                "dimensions": "Height: 9 inches, Diameter: 3 inches",
+                "material": "Pure Cast Brass",
+                "image_filename": "Screenshot 2026-06-19 180757.png",
+                "description": "Heavyweight traditional manual brass noodle press. Comes with interchangeable brass discs for Idiyappam (string hoppers), Murukku, and Pakkavada. Built for a lifetime of kitchen use."
             }
         ]
         

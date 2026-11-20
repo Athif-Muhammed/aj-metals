@@ -66,6 +66,84 @@ export default function ProductIllustration({ sku, className = "w-full h-full" }
         </svg>
       );
 
+    case "AJ-BR-003": // Handcrafted Brass Kindi
+      return (
+        <svg viewBox="0 0 100 100" className={`${className} text-primary-navy`} fill="none">
+          {/* Base ring */}
+          <ellipse cx="50" cy="82" rx="16" ry="4" stroke={strokeColor} strokeWidth="2" fill="#F7F5F0" />
+          {/* Round Pot Body */}
+          <ellipse cx="50" cy="62" rx="22" ry="18" stroke={strokeColor} strokeWidth="2" fill="#FAF7F2" />
+          {/* Neck and Flared Top Mouth */}
+          <path d="M42 46 C42 38 40 34 38 30 L62 30 C60 34 58 38 58 46" stroke={strokeColor} strokeWidth="2" fill="white" />
+          <ellipse cx="50" cy="30" rx="12" ry="3" stroke={strokeColor} strokeWidth="1.5" fill="#F7F5F0" />
+          {/* Extended Pouring Spout on left */}
+          <path d="M34 60 C26 56 18 50 16 42 C16 40 20 40 22 43 C26 48 32 52 36 54" stroke={strokeColor} strokeWidth="2" fill={goldColor} />
+          {/* Gold decorative rings */}
+          <ellipse cx="50" cy="58" rx="20" ry="4" stroke={goldColor} strokeWidth="1" />
+        </svg>
+      );
+
+    case "AJ-BR-004": // Ornate Kerala Thookkuvilakku (Hanging Diya)
+      return (
+        <svg viewBox="0 0 100 100" className={`${className} text-primary-navy`} fill="none">
+          {/* Hanging Chain Links */}
+          <line x1="50" y1="10" x2="50" y2="44" stroke={strokeColor} strokeWidth="1.5" strokeDasharray="3 2" />
+          <circle cx="50" cy="12" r="3" stroke={strokeColor} strokeWidth="1.5" />
+          <ellipse cx="50" cy="44" rx="4" ry="2" stroke={strokeColor} strokeWidth="1.5" fill={goldColor} />
+          
+          {/* Top Decorative Canopy */}
+          <path d="M42 48 L50 42 L58 48 Z" stroke={strokeColor} strokeWidth="1.5" fill="white" />
+
+          {/* Diya Oil Plate */}
+          <ellipse cx="50" cy="74" rx="26" ry="6" stroke={strokeColor} strokeWidth="2" fill="#FAF7F2" />
+          <ellipse cx="50" cy="74" rx="18" ry="4" stroke={strokeColor} strokeWidth="1" />
+          
+          {/* Center pillar between canopy and bowl */}
+          <line x1="50" y1="48" x2="50" y2="70" stroke={strokeColor} strokeWidth="2" />
+          <circle cx="50" cy="58" r="3.5" stroke={goldColor} strokeWidth="1.5" fill="white" />
+
+          {/* Glowing Flame */}
+          <path d="M50 69 C48 64 50 58 50 58 C50 58 52 64 50 69 Z" fill={goldColor} stroke={goldColor} strokeWidth="1" />
+        </svg>
+      );
+
+    case "AJ-CW-003": // Authentic Bell Metal Charu Uruli
+      return (
+        <svg viewBox="0 0 100 100" className={`${className} text-primary-navy`} fill="none">
+          {/* Deep curved pot */}
+          <path d="M18 48 C18 76 82 76 82 48" stroke={strokeColor} strokeWidth="2.5" fill="#FAF7F2" />
+          <ellipse cx="50" cy="48" rx="32" ry="7" stroke={strokeColor} strokeWidth="2" fill="white" />
+          <ellipse cx="50" cy="48" rx="27" ry="5.5" stroke={goldColor} strokeWidth="1.5" />
+          {/* Base bottom */}
+          <ellipse cx="50" cy="74" rx="18" ry="4" stroke={strokeColor} strokeWidth="1.5" />
+          {/* Heavy side lugs / handles */}
+          <path d="M18 48 C12 46 12 54 18 52" stroke={strokeColor} strokeWidth="2.5" fill="none" />
+          <path d="M82 48 C88 46 88 54 82 52" stroke={strokeColor} strokeWidth="2.5" fill="none" />
+        </svg>
+      );
+
+    case "AJ-KE-004": // Heavy Solid Brass Seva Nazhi / Idiyappam Press
+      return (
+        <svg viewBox="0 0 100 100" className={`${className} text-primary-navy`} fill="none">
+          {/* Top T-Bar Handle */}
+          <line x1="30" y1="24" x2="70" y2="24" stroke={strokeColor} strokeWidth="3" strokeLinecap="round" />
+          <circle cx="50" cy="24" r="3" fill={goldColor} />
+          {/* Vertical threaded screw */}
+          <line x1="50" y1="24" x2="50" y2="40" stroke={strokeColor} strokeWidth="2.5" />
+
+          {/* Main Cylinder Chamber */}
+          <rect x="36" y="40" width="28" height="38" rx="2" stroke={strokeColor} strokeWidth="2" fill="#FAF7F2" />
+          {/* Decorative brass bands on cylinder */}
+          <line x1="36" y1="50" x2="64" y2="50" stroke={goldColor} strokeWidth="1.5" />
+          <line x1="36" y1="62" x2="64" y2="62" stroke={goldColor} strokeWidth="1.5" />
+          {/* Side holding wings / handles */}
+          <path d="M36 44 L26 44 L26 50 L36 50" stroke={strokeColor} strokeWidth="2" fill={strokeColor} />
+          <path d="M64 44 L74 44 L74 50 L64 50" stroke={strokeColor} strokeWidth="2" fill={strokeColor} />
+          {/* Bottom perforated extruder rim */}
+          <ellipse cx="50" cy="78" rx="14" ry="3" stroke={strokeColor} strokeWidth="2" fill="white" />
+        </svg>
+      );
+
     case "AJ-ID-001": // Divine Brass Ganesha Idol
       return (
         <svg viewBox="0 0 100 100" className={`${className} text-primary-navy`} fill="none">

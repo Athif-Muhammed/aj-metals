@@ -157,11 +157,11 @@ export default function Home() {
       <Hero heroImage="Screenshot 2026-06-19 180642.png" />
 
       {/* Main Catalog Area */}
-      <main id="catalog-section" className="flex-grow max-w-7xl w-full mx-auto px-4 py-12 scroll-mt-24">
+      <main id="catalog-section" className="flex-grow max-w-7xl w-full mx-auto px-3 sm:px-4 py-8 sm:py-12 scroll-mt-24">
         
         {/* Controls: Search and Filters */}
-        <section className="relative z-20 -mt-24 mb-12">
-          <div className="bg-white rounded-xl border border-brass-gold/30 shadow-md p-6">
+        <section className="relative z-20 -mt-20 sm:-mt-24 mb-8 sm:mb-12">
+          <div className="bg-white rounded-xl border border-brass-gold/30 shadow-md p-4 sm:p-6">
             <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
             <CategoryTabs
               categories={categories}
@@ -172,12 +172,12 @@ export default function Home() {
         </section>
 
         {/* Trust Pillars Section (Establishes instant authority & social safety) */}
-        <section className="bg-white border border-brass-gold/15 rounded-xl py-6 px-6 mb-12 shadow-xs grid grid-cols-1 md:grid-cols-3 gap-8">
+        <section className="bg-white border border-brass-gold/15 rounded-xl py-4 sm:py-6 px-4 sm:px-6 mb-8 sm:mb-12 shadow-xs grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-8">
           <div className="flex gap-4 items-center">
             <span className="text-gold-bright text-xl bg-brass-light w-12 h-12 rounded-full flex justify-center items-center shrink-0 border border-brass-gold/20">🏆</span>
             <div>
               <h4 className="text-primary-navy font-bold text-xs sm:text-sm">20+ Years Legacy</h4>
-              <p className="text-gray-500 text-[10px] sm:text-xs mt-0.5">Serving Kayamkulam's Gold Bazar since 2006 with trust.</p>
+              <p className="text-gray-500 text-[10px] sm:text-xs mt-0.5">Serving Kayamkulam&apos;s Gold Bazar since 2006 with trust.</p>
             </div>
           </div>
           <div className="flex gap-4 items-center border-t md:border-t-0 md:border-x border-gray-100 py-4 md:py-0 md:px-8">
@@ -197,9 +197,9 @@ export default function Home() {
         </section>
 
         {/* Showcase Header */}
-        <section className="mb-8 flex flex-col sm:flex-row justify-between items-start sm:items-end gap-2">
+        <section className="mb-6 sm:mb-8 flex flex-col sm:flex-row justify-between items-start sm:items-end gap-2">
           <div>
-            <h2 className="font-serif text-3xl font-black text-primary-navy mb-1">Our Showcase</h2>
+            <h2 className="font-serif text-2xl sm:text-3xl font-black text-primary-navy mb-1">Our Showcase</h2>
             <p className="text-xs text-gray-500">
               Click on any product to view detailed specifications and full descriptions.
             </p>
@@ -213,14 +213,14 @@ export default function Home() {
         <section className="mb-24">
           {loading ? (
             /* Loading Skeleton Grid */
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-6 md:gap-8">
               {[...Array(8)].map((_, i) => (
-                <div key={i} className="bg-white rounded-xl border border-black/5 p-5 animate-pulse flex flex-col gap-4">
+                <div key={i} className="bg-white rounded-lg sm:rounded-xl border border-black/5 p-3 sm:p-5 animate-pulse flex flex-col gap-2 sm:gap-4">
                   <div className="bg-gray-200 aspect-square w-full rounded-md" />
-                  <div className="h-4 bg-gray-200 w-1/3 rounded-sm" />
-                  <div className="h-6 bg-gray-200 w-3/4 rounded-sm" />
-                  <div className="h-4 bg-gray-200 w-1/2 rounded-sm" />
-                  <div className="h-10 bg-gray-200 w-full rounded-md mt-auto" />
+                  <div className="h-3 sm:h-4 bg-gray-200 w-1/3 rounded-sm" />
+                  <div className="h-4 sm:h-6 bg-gray-200 w-3/4 rounded-sm" />
+                  <div className="h-3 sm:h-4 bg-gray-200 w-1/2 rounded-sm" />
+                  <div className="h-8 sm:h-10 bg-gray-200 w-full rounded-md mt-auto" />
                 </div>
               ))}
             </div>
@@ -270,7 +270,7 @@ export default function Home() {
                 Visit Us in Gold Bazar
               </h2>
               <p className="text-xs sm:text-sm text-gray-500 leading-relaxed mb-10">
-                Step into our physical showroom to touch, feel, and inspect the heavy, premium weight of our traditional cookware, pooja sets, and custom items. We've been serving local families, wedding groups, and temple committees since 2006.
+                Step into our physical showroom to touch, feel, and inspect the heavy, premium weight of our traditional cookware, pooja sets, and custom items. We&apos;ve been serving local families, wedding groups, and temple committees since 2006.
               </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-10 mb-12">
@@ -373,7 +373,7 @@ export default function Home() {
             <div className="bg-white border border-brass-gold/15 p-6 rounded-xl shadow-xs hover:border-brass-gold/30 transition-all duration-300">
               <span className="text-gold-bright text-base block mb-3">★★★★★</span>
               <p className="text-xs text-gray-500 italic leading-relaxed mb-6">
-                "Bought a heavy Vengala Uruli and brass Nilavilakku for my daughter's wedding. The weight and polishing were exceptional. Ordering via WhatsApp was simple and fast."
+                &quot;Bought a heavy Vengala Uruli and brass Nilavilakku for my daughter&apos;s wedding. The weight and polishing were exceptional. Ordering via WhatsApp was simple and fast.&quot;
               </p>
               <div className="flex items-center gap-3 border-t border-gray-100 pt-4">
                 <div className="bg-brass-light w-8 h-8 rounded-full flex justify-center items-center text-xs font-bold text-primary-navy">RP</div>
@@ -387,7 +387,7 @@ export default function Home() {
             <div className="bg-white border border-brass-gold/15 p-6 rounded-xl shadow-xs hover:border-brass-gold/30 transition-all duration-300">
               <span className="text-gold-bright text-base block mb-3">★★★★★</span>
               <p className="text-xs text-gray-500 italic leading-relaxed mb-6">
-                "We use AJ Metals' cookware for catering events in Kayamkulam. Their copper Vattu Chembu and heavy bronze vessels distribute heat perfectly. Unmatched quality at very fair rates."
+                &quot;We use AJ Metals&apos; cookware for catering events in Kayamkulam. Their copper Vattu Chembu and heavy bronze vessels distribute heat perfectly. Unmatched quality at very fair rates.&quot;
               </p>
               <div className="flex items-center gap-3 border-t border-gray-100 pt-4">
                 <div className="bg-brass-light w-8 h-8 rounded-full flex justify-center items-center text-xs font-bold text-primary-navy">MK</div>
@@ -401,7 +401,7 @@ export default function Home() {
             <div className="bg-white border border-brass-gold/15 p-6 rounded-xl shadow-xs hover:border-brass-gold/30 transition-all duration-300">
               <span className="text-gold-bright text-base block mb-3">★★★★★</span>
               <p className="text-xs text-gray-500 italic leading-relaxed mb-6">
-                "I ordered a copper bottle and brass puttu maker. The tin coating inside the puttu maker is clean and food-safe. It makes our breakfast taste traditional and healthy."
+                &quot;I ordered a copper bottle and brass puttu maker. The tin coating inside the puttu maker is clean and food-safe. It makes our breakfast taste traditional and healthy.&quot;
               </p>
               <div className="flex items-center gap-3 border-t border-gray-100 pt-4">
                 <div className="bg-brass-light w-8 h-8 rounded-full flex justify-center items-center text-xs font-bold text-primary-navy">AN</div>

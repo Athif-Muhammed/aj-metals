@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import WhatsAppIcon from "./WhatsAppIcon";
 
 export default function Hero({ heroImage }) {
   return (
@@ -26,7 +27,7 @@ export default function Hero({ heroImage }) {
           A Legacy of Pure <span className="shimmer-text italic font-bold">Craftsmanship</span>
         </h1>
         <p className="max-w-2xl text-sm sm:text-base md:text-lg text-brass-light/80 leading-relaxed mb-12">
-          For over two decades, AJ Metals has supplied premium traditional Kerala brassware, divine idols, heavy-duty event cookware, and everyday kitchen essentials directly from Kayamkulam's famous Gold Bazar.
+          For over two decades, AJ Metals has supplied premium traditional Kerala brassware, divine idols, heavy-duty event cookware, and everyday kitchen essentials directly from Kayamkulam&apos;s famous Gold Bazar.
         </p>
         {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10 mt-2 w-full sm:w-auto">
@@ -45,9 +46,10 @@ export default function Hero({ heroImage }) {
             href="https://wa.me/919446571575"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center h-12 px-8 border border-brass-gold/40 text-brass-light hover:border-gold-bright hover:text-gold-bright text-xs font-extrabold uppercase tracking-[1.5px] rounded-md transition-all duration-300 hover:-translate-y-0.5 w-full sm:w-auto box-border"
+            className="inline-flex items-center justify-center gap-2 h-12 px-8 border border-brass-gold/40 text-brass-light hover:border-gold-bright hover:text-gold-bright text-xs font-extrabold uppercase tracking-[1.5px] rounded-md transition-all duration-300 hover:-translate-y-0.5 w-full sm:w-auto box-border"
           >
-            Consult via WhatsApp
+            <WhatsAppIcon className="w-4 h-4 fill-current shrink-0" />
+            <span>Consult via WhatsApp</span>
           </a>
         </div>
         {/* Store Stats */}
