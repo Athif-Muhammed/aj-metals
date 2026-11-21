@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradient -->
+    <radialGradient id="bgGrad" cx="50%" cy="45%" r="65%">
+      <stop offset="0%" stop-color="#142850" />
+      <stop offset="60%" stop-color="#0c1b33" />
+      <stop offset="100%" stop-color="#060c18" />
+    </radialGradient>
+
+    <!-- Gold Metallic Gradient -->
+    <linearGradient id="goldRim" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F9E076" />
+      <stop offset="30%" stop-color="#D4AF37" />
+      <stop offset="50%" stop-color="#FFF2A3" />
+      <stop offset="70%" stop-color="#AA771C" />
+      <stop offset="100%" stop-color="#855806" />
+    </linearGradient>
+
+    <!-- Red Gradient for A -->
+    <linearGradient id="redGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF3B30" />
+      <stop offset="50%" stop-color="#E02424" />
+      <stop offset="100%" stop-color="#9B1C1C" />
+    </linearGradient>
+
+    <!-- Blue Gradient for J -->
+    <linearGradient id="blueGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2563EB" />
+      <stop offset="50%" stop-color="#1D4ED8" />
+      <stop offset="100%" stop-color="#1E3A8A" />
+    </linearGradient>
+
+    <!-- Inner Badge Shadow -->
+    <filter id="shadow" x="-10%" y="-10%" width="125%" height="125%">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#000" flood-opacity="0.45" />
+    </filter>
+
+    <!-- Emboss effect for emblem -->
+    <filter id="emblemShadow" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="2" dy="6" stdDeviation="4" flood-color="#000" flood-opacity="0.3" />
+    </filter>
+  </defs>
+
+  <!-- Canvas Background -->
+  <rect width="800" height="800" fill="url(#bgGrad)" />
+
+  <!-- Outer Circular Gold Bezel (WhatsApp Circle Safe) -->
+  <circle cx="400" cy="400" r="365" fill="none" stroke="url(#goldRim)" stroke-width="8" opacity="0.9" />
+  <circle cx="400" cy="400" r="350" fill="none" stroke="url(#goldRim)" stroke-width="2" opacity="0.5" stroke-dasharray="6,4" />
+
+  <!-- Center White Shield Badge -->
+  <g filter="url(#shadow)">
+    <circle cx="400" cy="380" r="240" fill="#FFFFFF" stroke="url(#goldRim)" stroke-width="6" />
+    <circle cx="400" cy="380" r="230" fill="none" stroke="#E2E8F0" stroke-width="1.5" />
+  </g>
+
+  <!-- Stylized AJ Monogram inside the badge -->
+  <g transform="translate(400, 355)" filter="url(#emblemShadow)">
+    <!-- Red Letter 'A' -->
+    <!-- Slanted, powerful architectural form -->
+    <path d="M -90,75 L -35,-85 L 15,-85 L -40,75 Z" fill="url(#redGrad)" />
+    <path d="M -20,-85 L 35,75 L -10,75 L -35,-15 Z" fill="url(#redGrad)" opacity="0.95" />
+    <!-- Crossbar / connector -->
+    <polygon points="-65,25 0,25 -8,5 -58,5" fill="url(#redGrad)" />
+
+    <!-- Royal Blue Letter 'J' with Dot -->
+    <!-- Dot (J's tittle) -->
+    <circle cx="70" cy="-90" r="22" fill="url(#blueGrad)" />
+
+    <!-- J's Stem and sweeping base curve under the A -->
+    <path d="M 52,-50 L 88,-50 L 88,40 C 88,72 65,88 25,88 L -35,88 C -55,88 -65,75 -65,75 L -65,52 C -65,52 -50,62 -30,62 L 20,62 C 45,62 52,50 52,35 Z" fill="url(#blueGrad)" />
+  </g>
+
+  <!-- Brand Typography: AJ METALS -->
+  <g text-anchor="middle">
+    <text x="400" y="555" font-family="'Cinzel', 'Trajan Pro', 'Georgia', serif" font-size="34" font-weight="900" letter-spacing="6" fill="url(#goldRim)" filter="url(#emblemShadow)">
+      AJ METALS
+    </text>
+    <text x="400" y="585" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="13" font-weight="700" letter-spacing="4" fill="#94A3B8">
+      KAYAMKULAM • KERALA
+    </text>
+    <text x="400" y="605" font-family="'Segoe UI', 'Helvetica Neue', Arial, sans-serif" font-size="11" font-weight="600" letter-spacing="2" fill="#D4AF37">
+      TRADITIONAL BRASSWARE &amp; COOKWARE
+    </text>
+  </g>
+
+  <!-- Subtle Kerala Nilavilakku / Spark Motif at Bottom -->
+  <g transform="translate(400, 635)">
+    <path d="M 0,-10 C 6,-3 8,4 0,10 C -8,4 -6,-3 0,-10 Z" fill="url(#goldRim)" />
+    <circle cx="-30" cy="0" r="2" fill="#D4AF37" />
+    <circle cx="30" cy="0" r="2" fill="#D4AF37" />
+    <line x1="-70" y1="0" x2="-38" y2="0" stroke="url(#goldRim)" stroke-width="1" opacity="0.6" />
+    <line x1="38" y1="0" x2="70" y2="0" stroke="url(#goldRim)" stroke-width="1" opacity="0.6" />
+  </g>
+</svg>

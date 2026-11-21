@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 150" width="100%" height="100%">
+  <defs>
+    <linearGradient id="goldH" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F9E076" />
+      <stop offset="50%" stop-color="#D4AF37" />
+      <stop offset="100%" stop-color="#AA771C" />
+    </linearGradient>
+    <linearGradient id="redH" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF3B30" />
+      <stop offset="100%" stop-color="#9B1C1C" />
+    </linearGradient>
+    <linearGradient id="blueH" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2563EB" />
+      <stop offset="100%" stop-color="#1E3A8A" />
+    </linearGradient>
+    <filter id="badgeShadowH" x="-10%" y="-10%" width="125%" height="125%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.3" />
+    </filter>
+  </defs>
+
+  <!-- Left Emblem Badge -->
+  <g transform="translate(15, 15)" filter="url(#badgeShadowH)">
+    <rect x="0" y="0" width="120" height="120" rx="24" fill="#FFFFFF" stroke="url(#goldH)" stroke-width="3" />
+    <!-- AJ Monogram -->
+    <g transform="translate(60, 60) scale(0.48)">
+      <!-- A -->
+      <path d="M -90,75 L -35,-85 L 15,-85 L -40,75 Z" fill="url(#redH)" />
+      <path d="M -20,-85 L 35,75 L -10,75 L -35,-15 Z" fill="url(#redH)" opacity="0.95" />
+      <polygon points="-65,25 0,25 -8,5 -58,5" fill="url(#redH)" />
+      <!-- J -->
+      <circle cx="70" cy="-90" r="22" fill="url(#blueH)" />
+      <path d="M 52,-50 L 88,-50 L 88,40 C 88,72 65,88 25,88 L -35,88 C -55,88 -65,75 -65,75 L -65,52 C -65,52 -50,62 -30,62 L 20,62 C 45,62 52,50 52,35 Z" fill="url(#blueH)" />
+    </g>
+  </g>
+
+  <!-- Right Typography -->
+  <g transform="translate(160, 45)">
+    <text x="0" y="32" font-family="'Cinzel', 'Trajan Pro', 'Georgia', serif" font-size="44" font-weight="900" letter-spacing="4" fill="#FFFFFF">
+      AJ <tspan fill="url(#goldH)">METALS</tspan>
+    </text>
+    <text x="2" y="58" font-family="'Segoe UI', Arial, sans-serif" font-size="13" font-weight="700" letter-spacing="3" fill="#94A3B8">
+      TRADITIONAL METALWARE SHOWROOM
+    </text>
+    <text x="2" y="76" font-family="'Segoe UI', Arial, sans-serif" font-size="11" font-weight="600" letter-spacing="2" fill="#D4AF37">
+      GOLD BAZAR, KAYAMKULAM • EST. 2004
+    </text>
+  </g>
+</svg>

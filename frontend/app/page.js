@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 import { MapPin, Clock, Phone, Award } from "lucide-react";
 import Navbar from "./components/Navbar";
@@ -97,35 +97,40 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Fetch products and categories from Django backend REST API
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-        const backendUrl = getBackendUrl();
-        
-        // Fetch Categories
-        const catRes = await fetch(`${backendUrl}/api/categories/`, { cache: 'no-store' });
-        if (!catRes.ok) throw new Error("Failed to fetch categories");
-        const catData = await catRes.json();
-        setCategories(catData);
-        
-        // Fetch Products
-        const prodRes = await fetch(`${backendUrl}/api/products/`, { cache: 'no-store' });
-        if (!prodRes.ok) throw new Error("Failed to fetch products");
-        const prodData = await prodRes.json();
-        setProducts(prodData);
-        
-        setLoading(false);
-      } catch (err) {
-        console.error("API Fetch Error:", err);
-        setError("Could not connect to the AJ Metals product database. Please ensure the Django backend server is running.");
-        setLoading(false);
-      }
-    };
+  // Fetch products and categories from Django backend REST API in parallel
+  const fetchData = useCallback(async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      const backendUrl = getBackendUrl();
+      
+      const [catRes, prodRes] = await Promise.all([
+        fetch(`${backendUrl}/api/categories/`, { cache: 'no-store' }),
+        fetch(`${backendUrl}/api/products/`, { cache: 'no-store' })
+      ]);
 
-    fetchData();
+      if (!catRes.ok || !prodRes.ok) {
+        throw new Error("Failed to fetch catalog from backend");
+      }
+
+      const [catData, prodData] = await Promise.all([
+        catRes.json(),
+        prodRes.json()
+      ]);
+
+      setCategories(catData);
+      setProducts(prodData);
+      setLoading(false);
+    } catch (err) {
+      console.error("API Fetch Error:", err);
+      setError("Could not connect to the AJ Metals product database. If the backend is waking up, please tap Retry below.");
+      setLoading(false);
+    }
   }, []);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
 
   // Filter products locally during render for zero-latency DOM updates
   const filteredProducts = products.filter((p) => {
@@ -231,7 +236,7 @@ export default function Home() {
               <h3 className="font-serif text-lg font-bold text-red-800 mb-2">Connection Error</h3>
               <p className="text-xs text-gray-500 max-w-md mx-auto mb-6">{error}</p>
               <button
-                onClick={() => window.location.reload()}
+                onClick={fetchData}
                 className="px-6 py-2.5 bg-primary-navy text-white text-xs font-bold rounded-md hover:bg-navy-light transition-all duration-300 shadow cursor-pointer"
               >
                 Retry Connection

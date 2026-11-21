@@ -174,15 +174,14 @@ STATICFILES_STORAGE = "whitenoise.storage.StaticFilesStorage"
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # CORS Configurations
+CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
-
-# If CORS_ALLOWED_ORIGINS is provided via environment, use it; otherwise allow all in DEBUG
-cors_env = os.environ.get('CORS_ALLOWED_ORIGINS')
-if cors_env:
-    CORS_ALLOWED_ORIGINS = [origin.strip() for origin in cors_env.split(',') if origin.strip()]
-    CORS_ALLOW_ALL_ORIGINS = False
-else:
-    CORS_ALLOW_ALL_ORIGINS = DEBUG
+CORS_ALLOWED_ORIGIN_REGEXES = [
+    r"^https://.*\.vercel\.app$",
+    r"^https://.*\.onrender\.com$",
+    r"^http://localhost:[0-9]+$",
+    r"^http://127\.0\.0\.1:[0-9]+$",
+]
 
 # Trusted origins for CSRF protection
 csrf_trusted_env = os.environ.get('CSRF_TRUSTED_ORIGINS')
